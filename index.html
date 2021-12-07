@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js" lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<meta property="og:url" content="https://smartnews-smri.github.io/hometown-tax-map/" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="ふるさと納税「市区町村別」寄付・控除額マップ" />
+		<meta property="og:description" content="" />
+		<meta property="og:image" content="" />
+		<meta name="twitter:card" content="summary_large_image" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.min.css"/>
+		<title>ふるさと納税「市区町村別」寄付・控除額マップ</title>
+	</head>
+	<body>
+		<div id="container">
+			<svg id="map"></svg>
+			<div id="title">
+				<h1><span>ふるさと納税「市区町村別」</span><span>寄付・控除額マップ</span></h1>
+			</div>
+			<div id="legend">
+				<table id="legend-table">
+					<tbody></tbody>
+				</table>
+			</div>
+			<div id="buttons">
+				<button id="intro-button"></button>
+        <a class="social-button facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//smartnews-smri.github.io/hometown-tax-map/" target="_blank"></a>
+        <a class="social-button twitter"  href="https://twitter.com/intent/tweet?text=%E3%81%B5%E3%82%8B%E3%81%95%E3%81%A8%E7%B4%8D%E7%A8%8E%E3%80%8C%E5%B8%82%E5%8C%BA%E7%94%BA%E6%9D%91%E5%88%A5%E3%80%8D%E5%AF%84%E4%BB%98%E3%83%BB%E6%8E%A7%E9%99%A4%E9%A1%8D%E3%83%9E%E3%83%83%E3%83%97%20-%20%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9%20%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E7%A0%94%E7%A9%B6%E6%89%80%0Ahttps%3A//smartnews-smri.github.io/hometown-tax-map/" target="_blank"></a>
+      </div>
+			<div id="intro" class="show">
+				<div id="intro-inner">
+					<h2><span>ふるさと納税「市区町村別」</span><span>寄付・控除額マップ</span></h2>
+					<hr>
+					<p>ふるさと納税の寄付額（自治体への寄付金額＝受入額）と控除額（住民の寄付により自治体への納税分が控除された金額）をマッピングしました。</p>
+					<button id="intro-button-show">マップを見る</button>
+					<hr>
+					<h4>データの見方</h4>
+					<p>市区町村ごとにふるさと納税データを基に色分けしています。ページ下部の「寄付/控除額」「寄付増加率」ボタンを切り替えると、表示するデータを切り替えることができます。</p>
+					<p>寄付/控除額は2020年度の寄付額から控除額を引いた金額、寄付増加率は5年前（2015年度）と比較した寄付額の増加率です。</p>
+					<p>市区町村をタップすると、詳細なデータを見ることができます。</p>
+					<h4>凡例</h4>
+					<p class="center">寄付/控除額</p>
+					<table class="legend-table netflow"><tbody></tbody></table>
+					<p class="center">寄付増加率</p>
+					<table class="legend-table growth"><tbody></tbody></table>
+					<h4>出典・制作</h4>
+					<p>データ：総務省・<a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/furusato/archive/" target="_blank">ふるさと納税ポータルサイト</a></p>
+					<p>市区町村の境界線：国土交通省・<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-v3_0.html" target="_blank">国土数値情報（行政区域データ）</a>を、<a href="https://github.com/smartnews-smri/japan-topography" target="_blank">スマートニュース メディア研究所が加工したもの</a>。</p>
+					<p>制作：<a href="https://smartnews-smri.com/member/kazuki-ogiwara/" target="_blank">荻原 和樹</a>（<a href="https://smartnews-smri.com/" target="_blank">スマートニュース メディア研究所</a>）</p>
+				</div>
+			</div>
+			<div id="info">
+				<div id="info-cover"></div>
+				<div id="info-content">
+					<h3></h3>
+					<hr>
+					<table>
+						<tbody>
+							<tr>
+								<th>寄付額：</th>
+								<td id="info-table-inflow"></td>
+								<td>千円</td>
+							</tr>
+							<tr>
+								<th>控除額：</th>
+								<td id="info-table-outflow"></td>
+								<td>千円</td>
+							</tr>
+							<tr>
+								<th>寄付/控除額：</th>
+								<td id="info-table-netflow"></td>
+								<td>千円</td>
+							</tr>
+							<tr>
+								<th>寄付増加率：</th>
+								<td id="info-table-growth"></td>
+								<td>倍</td>
+							</tr>
+						</tbody>
+					</table>
+					<div id="info-chart"></div>
+					<ul id="info-notes">
+						<li>寄付額：自治体への寄付金額。</li>
+						<li>控除額：住民の寄付により自治体への納税分が控除された金額。</li>
+						<li>寄付増加率：5年前（2015年度）と比較した寄付額の増減率。1倍なら増減なし。</li>
+						<li>寄付件数：自治体への寄付件数。</li>
+					</ul>
+				</div>
+			</div>
+			<div id="switch">
+				<div class="switch-item selected" code="netflow">寄付/控除額</div>
+				<div class="switch-item" code="growth">寄付増加率</div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+		<script src="js/script.min.js"></script>
+	</body>
+</html>
