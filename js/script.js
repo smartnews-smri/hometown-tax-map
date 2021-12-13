@@ -177,7 +177,7 @@ const init = () => {
     });
 
     let zoom = d3.zoom()
-          .scaleExtent([1, 2000])
+          .scaleExtent([0.3, 100])
           .on('zoom', function() {
               g.selectAll('path').attr('transform', d3.event.transform);
     });
