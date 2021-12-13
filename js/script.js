@@ -6,9 +6,10 @@ let data;
 let chart;
 const COLORS = {
   "default": "#cccccc",
-  "border": "#3C4146",
-  "background": "#3C4146",
+  "bar": "#4cf",
+  "line": "#ffc73d",
   "netflow": [
+    // Light mode
     [null,-1000,"#2166AC"],
     [-1000,-500,"#4393C3"],
     [-500,-50,"#92C5DE"],
@@ -19,18 +20,17 @@ const COLORS = {
     [1000,null,"#B2182B"]
   ],
   "growth": [
-    [null,1,"#f1f8e1"],
-    [1,10,"#b5c4aa"],
-    [10,100,"#7b9277"],
-    [100,1000,"#43634a"],
-    [1000,null,"#073722"]
+    [null,   1, "#f6fdf2"],
+    [1,      5, "#a6c1b8"],
+    [5,     10, "#5a878e"],
+    [10,    50, "#1b4e68"],
+    [50,  null, "#104c63"]
   ]
 };
 const UNIT = {
   "netflow": "百万円",
   "growth": "倍",
 };
-
 
 
 const init = () => {
@@ -74,6 +74,11 @@ const init = () => {
       let color = getColor(data[code]);
       $(this).attr("fill", color);
     });
+
+    selected = {
+      code: "",
+      fill: ""
+    }
   }
 
   const addCommas = (num) => {
@@ -90,7 +95,7 @@ const init = () => {
       for (let i = 0; i <= 24; i += 2) {
         values[0].push(city[i + 1]);
         values[1].push(city[i]);
-        colors[1].push("#8bd");
+        colors[1].push(COLORS.bar);
       }
 
       chart.config.data.datasets[0].data = values[0];
@@ -126,6 +131,12 @@ const init = () => {
     $("#map").empty();
 
     let projection = d3.geoMercator();
+
+    projection = d3.geoMercator()
+          .center([138, 37])
+          .translate([width/2, height/2])
+          .scale(4000);
+
     let svg = d3.select("#map");
     let path = d3.geoPath().projection(projection);
     let g = svg.append("g");
@@ -134,9 +145,7 @@ const init = () => {
     let filekey = "N03-21_210101";
 
     d3.json([filepath]).then(function(topology) {
-      //console.log(topology.objects);
       const maps2geo = topojson.feature(topology, topology.objects[filekey]);
-      projection.fitExtent([[0,0],[width, height]], maps2geo);
       g.selectAll("path")
         .data(maps2geo.features)
         .enter().append("path")
@@ -146,14 +155,19 @@ const init = () => {
          return d.properties["N03_007"];
         })
         .on('click tap touch', function(d, i){
-          if (selected.code != "") {
-            $("#map").find("path[code='" + selected.code + "']").attr("fill", selected.fill);
-          }
+          if (data[d.properties["N03_007"]]) {
 
-          selected.code = d3.select(this).attr("code");
-          selected.fill = d3.select(this).attr("fill");
-          d3.select(this).attr('fill', "yellow");
-          showCityInfo(d.properties);
+            if (selected.code != "") {
+              $("#map").find("path[code='" + selected.code + "']").attr("fill", selected.fill);
+            }
+
+            selected.code = d3.select(this).attr("code");
+            selected.fill = d3.select(this).attr("fill");
+            d3.select(this).attr('fill', "yellow");
+            showCityInfo(d.properties);
+          } else {
+            $("#info").removeClass("show");
+          }
         });
 
       d3.json("./data/data.json").then(function(d) {
@@ -207,8 +221,8 @@ const init = () => {
     }
 
     const adjustInfoContentHeight = () => {
-      let t = $("#info-content").outerHeight() + 36;
-      $("#info-content").css("bottom", "-" + t + "px");
+      let t = $("#info-content").outerWidth();
+      $("#info-content").css("right", "-" + t + "px");
     }
 
     let $chart = $("#info-chart").empty().html("<canvas></canvas>");
@@ -223,7 +237,8 @@ const init = () => {
           type: "line",
           backgroundColor: [],
           fill: false,
-          borderColor: "#fd5",
+          borderColor: COLORS.line,
+          borderWidth: 4,
           pointRadius: 0,
           pointStyle: "line",
           yAxisID: "y-axis-2",
@@ -258,7 +273,8 @@ const init = () => {
           display: true,
           reverse: true,
           labels: {
-            usePointStyle: true
+            usePointStyle: true,
+            fontColor: "rgba(255, 255, 255, 0.7)",
           }
         },
         title: {
@@ -290,7 +306,7 @@ const init = () => {
               zeroLineColor: "rgba(255,255,255,0.2)"
             },
             ticks: {
-              fontColor: "#888",
+              fontColor: "rgba(255, 255, 255, 0.5)",
               maxRotation: 0,
               minRotation: 0,
               callback: (label) => {
@@ -310,7 +326,7 @@ const init = () => {
             },
             ticks: {
               beginAtZero: true,
-              fontColor: "#888",
+              fontColor: "rgba(255, 255, 255, 0.5)",
               maxTicksLimit: 6,
               callback: (label) => getYAxisLabel(label)
             }
@@ -368,7 +384,7 @@ const init = () => {
       }
     });
 
-    $("#info").find("#info-cover").on("click", function(){
+    $("#info-button-close").on("click", function(){
       $("#info").removeClass("show");
     });
 
@@ -391,6 +407,7 @@ const init = () => {
   drawInfochart();
   drawLegendTable();
   bindEvents();
+  $("#intro").addClass("show");
 }
 
 

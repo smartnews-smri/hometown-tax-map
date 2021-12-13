@@ -17,7 +17,7 @@ $mobile-max-width: 428px;
 
 body {
   width: 100%;
-  background-color: #fcfcfc;
+  background-color: #0A1E28;
   overflow-y: scroll;
   color: #333;
   font-size: 16px;
@@ -44,7 +44,7 @@ body {
     z-index: 0;
 
     path {
-      stroke: #666;
+      stroke: #0A1E28;
       stroke-width: 0.2px;
       vector-effect: non-scaling-stroke;
     }
@@ -57,32 +57,26 @@ body {
     width: 100%;
     background: transparent;
     background: linear-gradient(0deg,
-      rgba(255, 255, 255, 0)    0%,
-      rgba(255, 255, 255, 1)  100%);
+      rgba(10, 30, 40, 0)    0%,
+      rgba(10, 30, 40, 1)  100%);
 
     h1 {
-      margin: 16px 0 16px 16px;
+      margin: 16px;
+      width: fit-content;
 
       span {
         font-weight: bold;
-        font-size: 20px;
-        color: #333;
-        text-shadow: rgb(255, 255, 255) 1px 0 4px;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: rgba(0, 0, 0, 0.4) 1px 0 4px;
         display: inline-block;
-        line-height: 36px;
+        line-height: 32px;
+      }
 
-        @media screen and (min-width: 350px){
-          font-size: 24px;
-          line-height: 40px;
-        }
-
-        @media screen and (min-width: 750px){
-          font-size: 30px;
-        }
-
-        @media screen and (min-width: 1200px){
-          font-size: 36px;
-        }
+      .sn-color-hr {
+        background: linear-gradient(90deg, #ff645b, #ff645b 25%, #ffc73d 0, #ffc73d 50%, #54e470 0, #54e470 75%, #0fbbe7 0, #0fbbe7);
+        width: 100%;
+        height: 1px;
       }
     }
   }
@@ -94,10 +88,7 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 200;
-    background-color: rgba(255, 255, 255, 0.8);
-    background-image: url('../img/background.png');
-    background-position: center;
-    background-size: cover;
+    background-color: rgba(10, 30, 40, 0.9);
     overflow-y: scroll;
 
     opacity: 0;
@@ -118,6 +109,19 @@ body {
       margin: 16px auto;
       margin-bottom: 32px;
 
+      .sn-color-hr-1 {
+        background: linear-gradient(90deg, #ff645b, #ff645b 25%, #ffc73d 0, #ffc73d 50%, #54e470 0, #54e470 75%, #0fbbe7 0, #0fbbe7);
+        width: 100%;
+        height: 2px;
+      }
+
+      .sn-color-hr-2 {
+        background: linear-gradient(90deg, #ff645b, #ff645b 25%, #ffc73d 0, #ffc73d 50%, #54e470 0, #54e470 75%, #0fbbe7 0, #0fbbe7);
+        width: 100%;
+        height: 1px;
+        opacity: 0.7;
+      }
+
       #intro-button-show {
         width: 200px;
         height: 40px;
@@ -137,8 +141,8 @@ body {
         span {
           font-weight: bold;
           font-size: 20px;
-          color: #333;
-          text-shadow: rgb(255, 255, 255) 1px 0 4px;
+          color: #fcfcfc;
+          text-shadow: rgba(0, 0, 0, 0.4) 1px 0 4px;
           display: inline-block;
           line-height: 36px;
 
@@ -156,21 +160,19 @@ body {
 
       h4 {
         margin-top: 32px;
-        margin-bottom: 8px;
         font-size: 16px;
         font-weight: bold;
-        color: #333;
-        border-bottom: 1px solid #eee;
+        color: #fcfcfc;
       }
 
       p {
-        color: #333;
+        color: rgba(255, 255, 255, 0.7);
         font-size: 15px;
         line-height: 30px;
         margin-top: 16px;
 
         a {
-          color: #268;
+          color: #9df;
         }
 
         &.center {
@@ -187,13 +189,13 @@ body {
           td {
             padding: 0 4px;
             text-align: right;
-            color: #333;
-            border-top: 1px solid #f0f0f0;
-            border-bottom: 1px solid #f0f0f0;
+            color: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
             &:nth-child(2) {
               font-size: 12px;
-              color: #bbb;
+              color: rgba(255, 255, 255, 0.4);
             }
 
             .circle {
@@ -221,7 +223,7 @@ body {
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: 100;
+      z-index: 600;
       background-color: rgba(0, 0, 0, 0);
       pointer-events: none;
       transition: all ease 250ms;
@@ -229,32 +231,49 @@ body {
 
     #info-content {
       position: fixed;
-      bottom: -100vh;
-      right: 0;
-      width: 100vw;
+      top: 0;
+      right: calc(#{$mobile-max-width} * -1);
+      height: 100vh;
+      width: calc(100% - 32px);
       max-width: $mobile-max-width;
       background-color: rgba(0,0,0,.8);
       z-index: 200;
       color: #fefefe;
       padding: 16px;
+      padding-top: 64px;
       transition: all ease 250ms;
 
-      @media screen and (min-width: ($mobile-max-width + 1)){
-        border-radius: 4px;
+      #info-button-close {
+        $size: 44px;
+        position: absolute;
+        top: 16px;
         right: 16px;
-      }
+        width: $size;
+        height: $size;
+        border: none;
+        border-radius: calc(#{$size} * 0.5);
+        background-color: transparent;
+        background-image: url('../img/material-icon-close.svg');
+        background-position: center center;
+        background-size: 80%;
+        background-repeat: no-repeat;
 
-      section {
-        display: none;
-
-        &.show {
-          display: block;
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(255, 255, 255, 0.2);
         }
       }
 
       h3 {
         font-size: 20px;
         font-weight: bold;
+      }
+
+      .sn-color-hr {
+        background: linear-gradient(90deg, #ff645b, #ff645b 25%, #ffc73d 0, #ffc73d 50%, #54e470 0, #54e470 75%, #0fbbe7 0, #0fbbe7);
+        width: 100%;
+        height: 1px;
+        margin-bottom: 16px;
       }
 
       table {
@@ -295,21 +314,12 @@ body {
 
     &.show {
       #info-cover {
-        background-color: rgba(0, 0, 0, 0.6);
-        pointer-events: auto;
-
-        @media screen and (min-width: ($mobile-max-width + 1)){
-          background-color: transparent;
-          pointer-events: none;
-        }
+        background-color: transparent;
+        pointer-events: none;
       }
 
       #info-content {
-        bottom: 0px !important;
-
-        @media screen and (min-width: ($mobile-max-width + 1)){
-          bottom: 16px !important;
-        }
+        right: 0px !important;
       }
     }
   }
@@ -336,7 +346,7 @@ body {
       background-size: cover;
       background-repeat: no-repeat;
       border: 1px solid #fefefe;
-      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+      box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.3);
 
       &:hover {
         cursor: pointer;
@@ -367,44 +377,36 @@ body {
     position: fixed;
     width: calc(100vw - (#{$switch-margin} * 2));
     max-width: $max-switch-width;
-    height: 40px;
     bottom: $switch-margin;
     left: $switch-margin;
+    background-color: #242a3c;
     display: flex;
     border: none;
-    border-radius: 4px;
+    height: 42px;
+    border-radius: 21px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
-
 
     @media screen and (min-width: ($max-switch-width + ($switch-margin * 2) + 1)){
       left: calc(50vw - (#{$max-switch-width} / 2));
     }
 
     .switch-item {
-      background-color: #eee;
-      color: #888;
+      margin: 1px;
+      color: #aaa;
       width: 50%;
+      height: 40px;
+      border-radius: 20px;
       font-size: 16px;
       text-align: center;
       line-height: 40px;
 
       &:hover {
         cursor: pointer;
-        background-color: #ddd;
-      }
-
-      &:nth-child(1) {
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-      }
-
-      &:nth-child(2) {
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
+        background-color: #474f62;
       }
 
       &.selected {
-        background-color: #369;
+        background-color: #d72;
         color: #fefefe;
       }
     }
