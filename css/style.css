@@ -26,6 +26,8 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     margin-top: 2px;
     margin-bottom: 16px; }
+  body .hide {
+    display: none !important; }
   body #map {
     position: fixed;
     width: 100vw;

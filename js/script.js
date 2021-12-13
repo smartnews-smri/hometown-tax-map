@@ -173,6 +173,10 @@ const init = () => {
       d3.json("./data/data.json").then(function(d) {
         data = d;
         updateMapColors();
+
+        $("#title").removeClass("hide");
+        $("#buttons").removeClass("hide");
+        $("#switch").removeClass("hide");
       });
     });
 
