@@ -108,6 +108,7 @@ body {
       max-width: 480px;
       margin: 16px auto;
       margin-bottom: 32px;
+      padding-bottom: 64px;
 
       .sn-color-hr-1 {
         background: linear-gradient(90deg, #ff645b, #ff645b 25%, #ffc73d 0, #ffc73d 50%, #54e470 0, #54e470 75%, #0fbbe7 0, #0fbbe7);
@@ -160,6 +161,7 @@ body {
 
       h4 {
         margin-top: 32px;
+        margin-bottom: 2px;
         font-size: 16px;
         font-weight: bold;
         color: #fcfcfc;
@@ -177,6 +179,11 @@ body {
 
         &.center {
           text-align: center;
+        }
+
+        small {
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.5);
         }
       }
 
@@ -267,6 +274,7 @@ body {
       h3 {
         font-size: 20px;
         font-weight: bold;
+        margin-bottom: 4px;
       }
 
       .sn-color-hr {

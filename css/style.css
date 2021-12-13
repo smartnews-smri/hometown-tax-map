@@ -88,7 +88,8 @@ body {
       width: calc(100% - 32px);
       max-width: 480px;
       margin: 16px auto;
-      margin-bottom: 32px; }
+      margin-bottom: 32px;
+      padding-bottom: 64px; }
       body #intro #intro-inner .sn-color-hr-1 {
         background: -webkit-gradient(linear, left top, right top, from(#ff645b), color-stop(25%, #ff645b), color-stop(0, #ffc73d), color-stop(50%, #ffc73d), color-stop(0, #54e470), color-stop(75%, #54e470), color-stop(0, #0fbbe7), to(#0fbbe7));
         background: linear-gradient(90deg, #ff645b, #ff645b 25%, #ffc73d 0, #ffc73d 50%, #54e470 0, #54e470 75%, #0fbbe7 0, #0fbbe7);
@@ -128,6 +129,7 @@ body {
             line-height: 48px; } }
       body #intro #intro-inner h4 {
         margin-top: 32px;
+        margin-bottom: 2px;
         font-size: 16px;
         font-weight: bold;
         color: #fcfcfc; }
@@ -140,6 +142,9 @@ body {
           color: #9df; }
         body #intro #intro-inner p.center {
           text-align: center; }
+        body #intro #intro-inner p small {
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.5); }
       body #intro #intro-inner .legend-table {
         border-collapse: collapse;
         margin: 0 auto;
@@ -205,7 +210,8 @@ body {
         background-color: rgba(255, 255, 255, 0.2); }
     body #info #info-content h3 {
       font-size: 20px;
-      font-weight: bold; }
+      font-weight: bold;
+      margin-bottom: 4px; }
     body #info #info-content .sn-color-hr {
       background: -webkit-gradient(linear, left top, right top, from(#ff645b), color-stop(25%, #ff645b), color-stop(0, #ffc73d), color-stop(50%, #ffc73d), color-stop(0, #54e470), color-stop(75%, #54e470), color-stop(0, #0fbbe7), to(#0fbbe7));
       background: linear-gradient(90deg, #ff645b, #ff645b 25%, #ffc73d 0, #ffc73d 50%, #54e470 0, #54e470 75%, #0fbbe7 0, #0fbbe7);
