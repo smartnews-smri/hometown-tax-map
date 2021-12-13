@@ -6,8 +6,8 @@ let data;
 let chart;
 const COLORS = {
   "default": "#cccccc",
-  "bar": "#4cf",
-  "line": "#ffc73d",
+  "bar": "#5cd",
+  "line": "#fc3",
   "netflow": [
     // Light mode
     [null,-1000,"#2166AC"],
