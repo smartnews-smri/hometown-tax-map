@@ -332,7 +332,7 @@ const init = () => {
               beginAtZero: true,
               fontColor: "rgba(255, 255, 255, 0.5)",
               maxTicksLimit: 6,
-              callback: (label) => getYAxisLabel(label)
+              callback: (label) => getYAxisLabel(label * 1000) + "円"
             }
           },{
             id: "y-axis-2",
@@ -346,9 +346,9 @@ const init = () => {
             },
             ticks: {
               beginAtZero: true,
-              fontColor: "#888",
+              fontColor: "rgba(255, 255, 255, 0.5)",
               maxTicksLimit: 6,
-              callback: (label) => getYAxisLabel(label)
+              callback: (label) => getYAxisLabel(label) + "件"
             }
           }]
         }
