@@ -405,6 +405,12 @@ const init = () => {
         $("#info").removeClass("show");
       }
     });
+
+    $("#intro").on("click", function(e){
+      if (!$(e.target).closest("#intro-inner")[0]) {
+        $("#intro").removeClass("show");
+      }
+    });
   }
 
   drawMap();
